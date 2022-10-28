@@ -4,7 +4,7 @@ jobs:
   get-runs-on:
     runs-on: ubuntu-latest
     steps:
-      - uses: socialdatabase/gh-actions-runner@main
+      - uses: socialdatabase/gh-actions-runner@test-workflow
 
   test:
     # runs-on: [ self-hosted, "${{ steps.get-runs-on.outputs.runs-on }}" ]
