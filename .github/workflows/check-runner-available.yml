@@ -1,0 +1,13 @@
+name: Check for availabilty of self-hosted runner
+on: workflow_dispatch
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      runs-on: ${{ steps.check.outputs.runs-on }}
+    env:
+      RUNNER_CFG_PAT: ${{ secrets.RUNNER_CFG_PAT }}
+    steps: 
+    - uses: actions/checkout@v3
+    - run: echo "runs-on=$(./check_runner_available.sh)" >> $GITHUB_OUTPUT
+      id: check
