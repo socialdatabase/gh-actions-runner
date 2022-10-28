@@ -9,6 +9,6 @@ jobs:
   test:
     runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
     steps:
-      run: echo ${{steps.build.outputs.hash}}
+      - run: echo ${{steps.build.outputs.hash}}
 
   
