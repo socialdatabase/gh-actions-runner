@@ -37,7 +37,7 @@ sudo systemctl restart docker
 # INSTALL DEPENDENCIES AND START RUNNER
 curl -s https://raw.githubusercontent.com/actions/runner/main/src/Misc/layoutbin/installdependencies.sh | DEBIAN_FRONTEND=noninteractive sudo bash
 curl -s https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh | bash -s socialdatabase
-sudo chown -R $USER:$USER ./runner/  # https://github.com/actions/checkout/issues/211#issuecomment-611986243
+sudo chown -R $(whoami):$(whoami) ./runner/  # https://github.com/actions/checkout/issues/211#issuecomment-611986243
 
 # CONFIGURE ACTIONS_RUNNER_HOOK_JOB_COMPLETED
 echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED='"'[[ ! -z $(docker ps -a -q) ]] && docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'"'" >> "$HOME"/runner/.env
