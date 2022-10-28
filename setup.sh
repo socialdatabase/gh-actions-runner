@@ -28,15 +28,14 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # USE LARGE PARTITION AS DATA-ROOT FOR DOCKER
-sudo cp $HOME/files/docker-deamon.json /etc/docker/daemon.json
+echo '{ "data-root": "'"$DIR"'", "features": { "buildkit": true } }' >> deamon.json
+sudo mv ./deamon.json /etc/docker/daemon.json  
 sudo systemctl restart docker
 
-# INSTALL DEPENDENCIES
-curl -s https://raw.githubusercontent.com/actions/runner/main/src/Misc/layoutbin/installdependencies.sh | sudo bash
+# INSTALL DEPENDENCIES AND START RUNNER
+curl -s https://raw.githubusercontent.com/actions/runner/main/src/Misc/layoutbin/installdependencies.sh | DEBIAN_FRONTEND=noninteractive sudo bash
+curl -s https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh | bash -s socialdatabase
+sudo chown -R $USER:$USER ./runner/  # https://github.com/actions/checkout/issues/211#issuecomment-611986243
 
 # CONFIGURE ACTIONS_RUNNER_HOOK_JOB_COMPLETED
-echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)" >>"$HOME"/runner/.env
-
-# START RUNNER
-curl -s https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh | bash -s socialdatabase
-sudo chown -R $USER:$USER ./runner/_work/  # https://github.com/actions/checkout/issues/211#issuecomment-611986243
+echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED='"'[[ ! -z $(docker ps -a -q) ]] && docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'"'" >> "$HOME"/runner/.env
