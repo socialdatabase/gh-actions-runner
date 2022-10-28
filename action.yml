@@ -1,0 +1,16 @@
+name: Check the avalability of the self-hosted runner
+description: Check the avalability of the self-hosted runner
+author: Chiel
+inputs:
+  runner_cfg_pat:
+    description: 'RUNNER_CFG_PAT, which is set in the secrets of the organisation'
+    required: true
+outputs:
+  runs-on:
+    description: The `runs-on` variable to use for the workflow
+    value: ${{ steps.get-runs-on.outputs.runs-on }}
+runs:
+  using: "composite"
+  steps:
+    - run: RUNNER_CFG_PAT=${{ inputs.who-to-greet }} check_runner_available.sh
+      shell: bash
