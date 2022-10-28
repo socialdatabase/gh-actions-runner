@@ -9,5 +9,12 @@ jobs:
       RUNNER_CFG_PAT: ${{ secrets.RUNNER_CFG_PAT }}
     steps: 
     - uses: actions/checkout@v3
-    - run: echo "runs-on=$(./check_runner_available.sh)" >> $GITHUB_OUTPUT
-      id: check
+    - run: |
+        STATUSSES=$(curl -s \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $RUNNER_CFG_PAT" \
+          https://api.github.com/orgs/socialdatabase/actions/runners | jq '.runners[].status')
+        if [[ "$STATUSSES" =~ .*"online".* ]]; then
+          echo "runs-on=[self-hosted]" >> $GITHUB_OUTPUT
+        else echo "runs-on=ubuntu-latest" >> $GITHUB_OUTPUT
+      id: runs-on
