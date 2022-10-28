@@ -7,7 +7,7 @@ jobs:
       - uses: socialdatabase/gh-actions-runner@main
 
   test:
-    runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
+    runs-on: [ "${{ steps.get-runs-on.outputs.runs-on }}" ]
     steps:
       - run: echo ${{ steps.get-runs-on.outputs.runs-on }}
 
