@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: socialdatabase/gh-actions-runner@test-workflow
+        id: get-runs-on
         with:
           runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
 
