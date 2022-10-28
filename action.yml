@@ -13,6 +13,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        STATUSSES=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ inputs.runner_cfg_pat }} https://api.github.com/orgs/socialdatabase/actions/runners | jq '.runners[].status') && \
-        if [[ "$STATUSSES" =~ .*"online".* ]]; then echo "runs-on=[self-hosted]" >> $GITHUB_OUTPUT else echo "runs-on=ubuntu-latest" >> $GITHUB_OUTPUT
+        if [[ $(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ inputs.runner_cfg_pat }} https://api.github.com/orgs/socialdatabase/actions/runners | jq '.runners[].status') =~ .*"online".* ]]; then echo "runs-on=[self-hosted]" >> $GITHUB_OUTPUT else echo "runs-on=ubuntu-latest" >> $GITHUB_OUTPUT
       shell: bash
