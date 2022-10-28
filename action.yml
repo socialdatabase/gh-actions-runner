@@ -12,5 +12,5 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: RUNNER_CFG_PAT=${{ inputs.who-to-greet }} check_runner_available.sh
+    - run: RUNNER_CFG_PAT=${{ inputs.runner_cfg_pat }} check_runner_available.sh
       shell: bash
