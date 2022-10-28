@@ -1,0 +1,6 @@
+{
+    "data-root": "/data",
+    "features": {
+        "buildkit": true
+    }
+}
