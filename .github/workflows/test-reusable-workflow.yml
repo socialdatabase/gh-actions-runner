@@ -12,6 +12,7 @@ jobs:
     # runs-on: [ self-hosted, "${{ steps.get-runs-on.outputs.runs-on }}" ]
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ secrets.RUNNER_CFG_PAT }}
       - run: echo "${{ steps.get-runs-on.outputs }}"
 
   
