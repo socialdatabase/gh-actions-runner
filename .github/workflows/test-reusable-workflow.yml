@@ -4,7 +4,7 @@ jobs:
   get-runs-on:
     runs-on: ubuntu-latest
     steps:
-      - uses: socialdatabase/gh-actions-runner/.github/workflows/check-runner-available.yml
+      - uses: socialdatabase/gh-actions-runner/.github/workflows/check-runner-available.yml@main
 
   test:
     # runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
