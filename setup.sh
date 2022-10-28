@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-[[ $(sudo dmidecode -s bios-vendor) != *"EC2"* ]] && echo "This script is only safe to run on (fresh) EC2 instances" && exit 1;
+[[ $(sudo dmidecode -s bios-vendor) != *"EC2"* ]] && echo "This script is intended run on (fresh) EC2 instances" && exit 1;
 [ -z "$RUNNER_CFG_PAT" ] && echo "Need to set RUNNER_CFG_PAT" && exit 1;
 sudo apt -y install curl jq
 
