@@ -7,8 +7,9 @@ jobs:
       - uses: ./.github/workflows/check-runner-available.yml
 
   test:
-    runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
+    # runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
-      - run: echo ${{steps.build.outputs.hash}}
+      - run: echo ${{ steps.get-runs-on.outputs.runs-on }}
 
   

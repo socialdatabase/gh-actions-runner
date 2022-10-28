@@ -1,10 +1,10 @@
 name: Check for availabilty of self-hosted runner
 on: workflow_dispatch
 jobs:
-  check:
+  get-runs-on:
     runs-on: ubuntu-latest
     outputs:
-      runs-on: ${{ steps.check.outputs.runs-on }}
+      runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
     env:
       RUNNER_CFG_PAT: ${{ secrets.RUNNER_CFG_PAT }}
     steps: 
