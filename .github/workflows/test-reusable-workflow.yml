@@ -6,8 +6,8 @@ jobs:
     steps:
       - uses: socialdatabase/gh-actions-runner@test-workflow
         with:
-          # runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
-          runner_cfg_pat: gha_pat***
+          runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
+          # runner_cfg_pat: gha_pat***
 
   test:
     # runs-on: [ self-hosted, "${{ steps.get-runs-on.outputs.runs-on }}" ]
