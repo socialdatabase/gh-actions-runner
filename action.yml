@@ -29,35 +29,3 @@ runs:
       env:
         RUNNER_CFG_PAT: ${{ inputs.runner_cfg_pat }}
       shell: bash
-
-
-# name: 'Hello World'
-# description: 'Greet someone'
-# inputs:
-#   runner_cfg_pat:
-#     description: 'RUNNER_CFG_PAT, which is set in the secrets of the organisation'
-#     required: true
-# outputs:
-#   runs-on:
-#     description: "Test"
-#     value: ${{ steps.check-availability.outputs.runs-on }}
-# runs:
-#   using: "composite"
-#   steps:
-#     - id: check-availability
-#       run: |
-#         STATUSSES=$(curl -s \
-#           -H "Accept: application/vnd.github+json" \
-#           -H "Authorization: Bearer $RUNNER_CFG_PAT" \
-#           https://api.github.com/orgs/socialdatabase/actions/runners | jq '.runners[].status')
-#         if [[ "$STATUSSES" =~ .*"online".* ]]; then
-#           echo "Using self-hosted"
-#           echo "runs-on=self-hosted" >> $GITHUB_OUTPUT
-#         else 
-#           echo "Using ubuntu-latest"
-#           echo "runs-on=ubuntu-latest" >> $GITHUB_OUTPUT
-#         fi
-#         cat $GITHUB_OUTPUT 
-#       env:
-#         RUNNER_CFG_PAT: ${{ inputs.runner_cfg_pat }}
-#       shell: bash
