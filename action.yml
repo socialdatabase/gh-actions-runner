@@ -40,6 +40,9 @@ outputs:
   random-number:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-number }}
+  runs-on:
+    description: "Test"
+    value: ${{ steps.check-availability.outputs.runs-on }}
 runs:
   using: "composite"
   steps:
