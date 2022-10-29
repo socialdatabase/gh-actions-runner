@@ -9,6 +9,7 @@ jobs:
     outputs:
       runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
     steps:
+      - uses: actions/checkout@v3
       - uses: socialdatabase/gh-actions-runner@test-workflow
         id: get-runs-on
         with:
