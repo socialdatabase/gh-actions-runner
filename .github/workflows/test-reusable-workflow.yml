@@ -15,7 +15,7 @@ jobs:
           runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
       - run: echo runs on ${{ steps.get-runs-on.outputs.runs-on }}
         shell: bash
-      - run: echo runs on $GITHUB_OUTPUT
+      - run: cat $GITHUB_OUTPUT
         shell: bash
 
   # test:
