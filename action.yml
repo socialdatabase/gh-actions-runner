@@ -33,10 +33,9 @@
 name: 'Hello World'
 description: 'Greet someone'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  runner_cfg_pat:
+    description: 'RUNNER_CFG_PAT, which is set in the secrets of the organisation'
     required: true
-    default: 'World'
 outputs:
   random-number:
     description: "Random number"
@@ -49,5 +48,5 @@ runs:
     - id: random-number-generator
       run: echo "random-number=4" >> $GITHUB_OUTPUT
       shell: bash
-    # - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-    #   shell: bash
+    - run: echo ${{ inputs.runner_cfg_pat }}
+      shell: bash

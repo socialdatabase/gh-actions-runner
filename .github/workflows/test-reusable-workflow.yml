@@ -37,6 +37,6 @@ jobs:
       - id: foo
         uses: socialdatabase/gh-actions-runner@test-workflow
         with:
-          who-to-greet: 'Mona the Octocat'
+          runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
