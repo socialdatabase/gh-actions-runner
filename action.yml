@@ -37,20 +37,12 @@ inputs:
     description: 'RUNNER_CFG_PAT, which is set in the secrets of the organisation'
     required: true
 outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
   runs-on:
     description: "Test"
     value: ${{ steps.check-availability.outputs.runs-on }}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "random-number=4" >> $GITHUB_OUTPUT
-      shell: bash
     - id: check-availability
       run: |
         STATUSSES=$(curl -s \
