@@ -1,28 +1,42 @@
-name: Check for availabilty of self-hosted runner
-on: 
-  push:
-  workflow_dispatch:
+# name: Check for availabilty of self-hosted runner
+# on: 
+#   push:
+#   workflow_dispatch:
+
+# jobs:
+#   get-runs-on:
+#     runs-on: ubuntu-latest
+#     # outputs:
+#     #   runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: socialdatabase/gh-actions-runner@test-workflow
+#         id: get-runs-on
+#         with:
+#           runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
+#       - run: echo runs on ${{ steps.get-runs-on.outputs.runs-on }}
+#         shell: bash
+#       - run: cat $GITHUB_OUTPUT
+#         shell: bash
+
+#   # test:
+#   #   # runs-on: [ "${{ steps.get-runs-on.outputs.runs-on }}" ]
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - run: echo "${{ steps.get-runs-on.outputs }}"
+#   #     - run: echo "${{ steps.get-runs-on.outputs.runs-on }}"
+
+on: [push]
 
 jobs:
-  get-runs-on:
+  hello_world_job:
     runs-on: ubuntu-latest
-    outputs:
-      runs-on: ${{ steps.get-runs-on.outputs.runs-on }}
+    name: A job to say hello
     steps:
       - uses: actions/checkout@v3
-      - uses: socialdatabase/gh-actions-runner@test-workflow
-        id: get-runs-on
+      - id: foo
+        uses: socialdatabase/gh-actions-runner@test-workflow
         with:
-          runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
-      - run: echo runs on ${{ steps.get-runs-on.outputs.runs-on }}
+          who-to-greet: 'Mona the Octocat'
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
-      - run: cat $GITHUB_OUTPUT
-        shell: bash
-
-  # test:
-  #   # runs-on: [ "${{ steps.get-runs-on.outputs.runs-on }}" ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "${{ steps.get-runs-on.outputs }}"
-  #     - run: echo "${{ steps.get-runs-on.outputs.runs-on }}"
-
