@@ -40,3 +40,5 @@ jobs:
           runner_cfg_pat: ${{ secrets.RUNNER_CFG_PAT }}
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
+      - run: echo random-number ${{ steps.foo.outputs.runs-on }}
+        shell: bash
