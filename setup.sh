@@ -42,10 +42,19 @@ sudo chown -R $USER:$USER ./runner/  # https://github.com/actions/checkout/issue
 # CONFIGURE ACTIONS_RUNNER_HOOK_JOB_COMPLETED
 sudo tee $HOME/cleanup.sh <<"EOF"
 #!/usr/bin/env bash
-[[ ! -z $(docker ps -a -q) ]]:
-    docker stop $(docker ps -a -q)
-    docker rm $(docker ps -a -q)
-    docker volume rm $(docker volume ls -qf dangling=true)
+echo "completed hook"
+if [[ ! -z $(docker ps -a -q) ]]
+then
+     docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume rm $(docker volume ls -qf dangling=true)
+fi
 EOF
-
 echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=$HOME/cleanup.sh" >> "$HOME"/runner/.env
+sudo chmod +x cleanup.sh
+
+sudo tee $HOME/startup.sh <<"EOF"
+#!/usr/bin/env bash
+echo "startup hook"
+sudo chown -R ubuntu:ubuntu /home/ubuntu/runner/
+EOF
+echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=$HOME/startup.sh" >> "$HOME"/runner/.env
+sudo chmod +x $HOME/startup.sh
