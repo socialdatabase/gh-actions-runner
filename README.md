@@ -5,5 +5,5 @@ For running the workflows on our own infrastructure. This is handy because of:
 
 
 ```
-curl -s https://raw.githubusercontent.com/socialdatabase/gh-actions-runner/master/setup-ubuntu-dc-vm.sh | RUNNER_CFG_PAT=ghp_*** DEBIAN_FRONTEND=noninteractive bash
+curl -s https://raw.githubusercontent.com/socialdatabase/gh-actions-runner/master/setup-ubuntu-dc-vm.sh | RUNNER_CFG_PAT=ghp_*** bash
 ```
